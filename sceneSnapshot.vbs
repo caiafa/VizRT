@@ -1,7 +1,7 @@
 Dim SCENE_ID 			As String
 Dim CAMERA 				As Camera
-Dim EXPORT_PATH As String = "//vizrt/work/dataSources/PROTV/popups/snaps/"
-Dim SNAP_LOCATION As String = "ON_AIR/MCR/PROTV/popups/snaps/"
+Dim EXPORT_PATH As String = "path"
+Dim SNAP_LOCATION As String = "anotherPath"
 
 Sub exec()
 	Dim currentCx As Double
