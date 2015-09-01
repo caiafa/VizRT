@@ -1,19 +1,19 @@
 Dim SCENE_ID 			As String
-Dim CAMERA 				As Camera
-Dim CROP_MASK As Container
-Dim EXPORT_PATH As String = "//vizrt/work/dataSources/PROTV/popups/snaps/"
-Dim SNAP_LOCATION As String = "ON_AIR/MCR/PROTV/popups/snaps/"
+Dim CAMERA 			As Camera
+Dim CROP_MASK 			As Container
+Dim EXPORT_PATH 		As String = "//vizrt/work/dataSources/PROTV/popups/snaps/"
+Dim SNAP_LOCATION 		As String = "ON_AIR/MCR/PROTV/popups/snaps/"
 
 Sub exec()
 	Dim currentCx As Double
 	Dim currentCMPosX As Double
 	
-	CROP_MASK = Scene.FindContainer("cropMask")
-	currentCMPosX = CROP_MASK.Position.x
-	CROP_MASK.Position.x += 500
+	CROP_MASK 		= Scene.FindContainer("cropMask")
+	currentCMPosX 		= CROP_MASK.Position.x
+	CROP_MASK.Position.x   += 500
 	
-	SCENE_ID = Scene.Name 
-	CAMERA = Scene.CurrentCamera
+	SCENE_ID 	= Scene.Name 
+	CAMERA 		= Scene.CurrentCamera
 	
 	currentCx = CAMERA.Cx
 	CAMERA.Cx = 0
@@ -21,8 +21,8 @@ Sub exec()
 	takeSnap("RGBA", SNAP_LOCATION, SCENE_ID)
 	exportSnap(EXPORT_PATH, SNAP_LOCATION, SCENE_ID)
 	
-	CAMERA.Cx = currentCx
-	CROP_MASK.Position.x = currentCMPosX
+	CAMERA.Cx 		= currentCx
+	CROP_MASK.Position.x 	= currentCMPosX
 End Sub
 
 Sub OnInitParameters()
