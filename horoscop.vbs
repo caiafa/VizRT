@@ -11,7 +11,7 @@ Dim NEXT_NAME As Container
 
 Structure zodiac
 	nume 		As string
-	inceput As datetime 
+	inceput 	As datetime 
 	symbol		As string
 	index		As integer
 End Structure
@@ -19,7 +19,6 @@ End Structure
 Sub OnSharedMemoryVariableChanged(map As SharedMemory, mapKey As String)
 	If mapKey == ZODIE_START Then
 		populateZodii()
-		setupZodii()
 		
 		CURRENT_ZODIE.CreateTexture(SYMBOLS_PATH & zodiiList[currentZodie mod 12 - 1].symbol)
 		NEXT_ZODIE.CreateTexture(SYMBOLS_PATH & zodiiList[(currentZodie+1) mod 12 - 1].symbol)
@@ -32,6 +31,7 @@ Sub OnInitParameters()
 	RegisterPushButton("INIT", "INIT", 2)
 	RegisterPushButton("NEXT", "NEXT", 1)
 	RegisterPushButton("CHANGE", "CHANGE", 3)
+	RegisterPushButton("RESTART", "RESTART", 4)
 End Sub
 
 Sub nextZodie()
@@ -62,31 +62,12 @@ Sub init()
 	NEXT_NAME.Geometry.Text =  zodiiList[(currentZodie+1) mod 12 - 1].nume
 End Sub
 
-Sub OnInit()
-	CURRENT_ZODIE = This.NextContainer.FindSubContainer("CURRENT_ZODIE")
-	NEXT_ZODIE = This.NextContainer.FindSubContainer("NEXT_ZODIE")
-	CURRENT_NAME = This.NextContainer.FindSubContainer("CURRENT_NAME")
-	NEXT_NAME = This.NextContainer.FindSubContainer("NEXT_NAME")
-	
-	Scene.Map.RegisterChangedCallback (ZODIE_START)
-
-	initZodii()
-	populateZodii()
-	
-	CURRENT_ZODIE.CreateTexture(SYMBOLS_PATH & zodiiList[currentZodie mod 12 - 1].symbol)
-	NEXT_ZODIE.CreateTexture(SYMBOLS_PATH & zodiiList[(currentZodie+1) mod 12 - 1].symbol)
-	CURRENT_NAME.Geometry.Text = zodiiList[currentZodie mod 12 - 1].nume
-	NEXT_NAME.Geometry.Text =  zodiiList[(currentZodie+1) mod 12 - 1].nume
-End Sub
-
 Sub populateZodii()
 	Dim avemZodie As boolean = false
-	
 	Dim zodieStartUpp As string = CStr(Scene.Map["zodieStart"])
 	Dim zodieStartLow As string = CStr(Scene.Map["zodieStart"])
 
 	Dim currentDate As datetime 	= GetCurrentTime()
-	
 	zodieStartUpp.MakeUpper()
 	zodieStartLow.MakeLower()
 	
@@ -112,6 +93,7 @@ Sub populateZodii()
 			End If
 		Next
 	End If
+	
 End Sub
 
 Sub initZodii()
@@ -121,7 +103,7 @@ Sub initZodii()
 	utilityDate.Minute = 0
 
 	utilityDate.DayOfMonth = 20
-	utilityDate.Month 					=	1
+	utilityDate.Month 				   = 1
 	zodie.nume 					   = "VĂRSĂTOR"
 	zodie.inceput 					   = utilityDate
 	zodie.symbol					   = "varsator"
@@ -129,7 +111,7 @@ Sub initZodii()
 	zodiiList.Push(zodie)
 	
 	utilityDate.DayOfMonth = 19
-	utilityDate.Month 					=	2
+	utilityDate.Month 				   = 2
 	zodie.nume 					   = "PEŞTI"
 	zodie.inceput 					   = utilityDate
 	zodie.symbol					   = "pesti"
@@ -137,7 +119,7 @@ Sub initZodii()
 	zodiiList.Push(zodie)
 
 	utilityDate.DayOfMonth = 21
-	utilityDate.Month 					=	3
+	utilityDate.Month 			           = 3
 	zodie.nume 					   = "BERBEC"
 	zodie.inceput 					   = utilityDate
 	zodie.symbol					   = "berbec"
@@ -225,6 +207,7 @@ Sub OnExecAction(buttonId As Integer)
 		init()
 	Elseif buttonId == 3 Then
 		changeCurrent()
+	Elseif buttonId == 4 Then
 		GetDirector().Show(GetDirector().FindKeyframe("IN").Time)
 		GetDirector().ContinueAnimation()
 	End If
