@@ -18,6 +18,7 @@ Sub OnInitParameters()
 	RegisterParameterInt("dX","X", 960, 0, 1920)
 	RegisterParameterInt("dY","Y", 540, 0, 1080)
 	RegisterRadioButton("centerPoint", "CENTER", 4, centerPoints)
+	RegisterPushButton("update", "UPDATE", 1)
 End Sub
 
 Sub move()
@@ -55,6 +56,12 @@ End Sub
 
 Sub OnParameterChanged(parameterName As String)
 	move()
+End Sub
+
+Sub OnExecAction(buttonId As Integer)
+	If buttonId == 1 Then
+		move()
+	End If
 End Sub
 
 Function ScreenToRendererPosition(x As Integer, y As Integer) As Vertex
