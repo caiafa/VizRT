@@ -65,6 +65,6 @@ Function ScreenToRendererPosition(x As Integer, y As Integer) As Vertex
 	xC   = System.RenderWindowWidth
 	yC   = System.RenderWindowHeight
 	
-	ScreenToRendererPosition.x = cInt((x*cInt(xC))/cInt(xHD))
-	ScreenToRendererPosition.y = cInt((y*cInt(yC))/cInt(yHD))
+	ScreenToRendererPosition.x = cInt((x*xC)/xHD)
+	ScreenToRendererPosition.y = cInt((y*yC)/yHD)
 End Function
