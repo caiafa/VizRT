@@ -5,6 +5,10 @@ Sub OnInitParameters()
 End Sub
 
 Sub OnParameterChanged(parameterName As String)
+	moveCenter()
+End Sub
+
+Sub moveCenter()
 	Dim container As container
 	container = GetParameterContainer("pivot")
 	container.LocalPosToScreenPos(container.position.xyz, x, y)
