@@ -9,7 +9,7 @@ Sub randomContainer()
 	This.GetContainerAndSubContainers(picturesAvailable, False)
 	picturesAvailable.Erase(0)
 
-	showPictures = Random(picturesAvailable.Ubound)
+	showPictures = Random(picturesAvailable.Ubound + 1)
 	
 	For i = 0 To picturesAvailable.Ubound
 		If i == showPictures Then
@@ -29,4 +29,3 @@ End Sub
 Sub OnInitParameters()
 	RegisterPushButton("update", "UPDATE", 1)
 End Sub
-
