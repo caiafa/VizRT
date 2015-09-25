@@ -1,7 +1,3 @@
-Sub OnInit()
-	renameContainers()
-End Sub
-
 Sub renameContainers()
 	Dim subcontainers As Array[container]
 	Dim names As Array[string]
@@ -43,5 +39,5 @@ End Sub
 
 Sub OnInitParameters()
 	RegisterParameterText("text", "", 300, 200)
-	RegisterPushButton("rename", "UPDATE", 1)
+	RegisterPushButton("update", "UPDATE", 1)
 End Sub
