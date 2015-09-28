@@ -25,6 +25,7 @@ Sub renameContainers()
 	For i = 0 To subcontainers.Ubound
 		If i <= names.Ubound Then
 			subcontainers[i].Name = names[i]
+			subcontainers[i].Update()
 		Else
 			Exit For
 		End If
