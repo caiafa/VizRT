@@ -4,6 +4,7 @@ centerPoints.push("Top Right")
 centerPoints.push("Bottom Left")
 centerPoints.push("Bottom Right")
 centerPoints.push("Center")
+centerPoints.push("Current")
 
 Sub OnInit()
 	This.Geometry.RegisterChangedCallback()
@@ -44,6 +45,7 @@ Sub move()
 	Case 4
 		SendCommand("#" & this.VizId & "*TRANSFORMATION*CENTER*Y SET C")
 		SendCommand("#" & this.VizId & "*TRANSFORMATION*CENTER*X SET C")
+	Case 5
 	End Select
 	
 	dX = GetParameterInt("dX")
