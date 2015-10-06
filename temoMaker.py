@@ -34,7 +34,6 @@ class makeComposite:
                         composite.paste(currentImage, (int(column*imageW), int(row*imageH)))
             self.image = composite
         except:
-            print ("Unexpected error:", sys.exc_info()[0])
             raise
 
 class Form(QWidget):
@@ -105,6 +104,7 @@ class Form(QWidget):
                     self.imageW.insert(newW)
             except:
                 print (sys.exc_info())
+                pass
         else:
             try:
                 if self.imageW.text() != "":
@@ -113,13 +113,15 @@ class Form(QWidget):
                     self.imageH.insert(newH)
             except:
                 print (sys.exc_info())
+                pass
 
     def pickFolder(self):
-        folder = QFileDialog.getExistingDirectory(self, 'Open folder', '')
-        self.folderLine.insert(folder)
-
         try:
+            folder = QFileDialog.getExistingDirectory(self, 'Open folder', '')
+            self.folderLine.clear()
+            self.folderLine.insert(folder)
             self.composite = makeComposite(folder).image
+
             (width, height) = self.composite.size
 
             self.oW = width
@@ -130,9 +132,14 @@ class Form(QWidget):
 
             self.imageW.insert(str(width))
             self.imageH.insert(str(height))
+        except FileNotFoundError:
+            self.folderLine.clear()
+            self.imageH.clear()
+            self.imageW.clear()
+            pass
         except:
-            print (sys.exc_info())
-            raise
+            self.pickFolder()
+            pass
 
     def generateComposite(self):
         saveLocation = QFileDialog.getSaveFileName (self, "Save Image", "", "Image Files (*.png)")
@@ -147,7 +154,7 @@ class Form(QWidget):
                 resized.close()
         except:
             print (sys.exc_info())
-            raise
+            pass
 
 if __name__ == '__main__':
     import sys
