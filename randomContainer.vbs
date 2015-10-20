@@ -3,19 +3,19 @@ Sub OnInit()
 End Sub
 
 Sub randomContainer()
-	Dim picturesAvailable As Array[container]
-	Dim showPictures As Integer
+	Dim containersAvailable As Array[container]
+	Dim showContainer As Integer
 	
-	This.GetContainerAndSubContainers(picturesAvailable, False)
-	picturesAvailable.Erase(0)
+	This.GetContainerAndSubContainers(containersAvailable, False)
+	containersAvailable.Erase(0)
 
-	showPictures = Random(picturesAvailable.Ubound + 1)
+	showPictures = Random(containersAvailable.Ubound + 1)
 	
-	For i = 0 To picturesAvailable.Ubound
-		If i == showPictures Then
-			picturesAvailable[i].Active = True
+	For i = 0 To containersAvailable.Ubound
+		If i == showContainer Then
+			containersAvailable[i].Active = True
 		Else
-			picturesAvailable[i].Active = False
+			containersAvailable[i].Active = False
 		End If
 	Next
 End Sub
