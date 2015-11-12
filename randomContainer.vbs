@@ -9,7 +9,7 @@ Sub randomContainer()
 	This.GetContainerAndSubContainers(containersAvailable, False)
 	containersAvailable.Erase(0)
 
-	showPictures = Random(containersAvailable.Ubound + 1)
+	showContainer = Random(containersAvailable.Ubound + 1)
 	
 	For i = 0 To containersAvailable.Ubound
 		If i == showContainer Then
