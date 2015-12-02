@@ -192,7 +192,6 @@ Sub initZodii()
 
 	utilityDate.DayOfMonth = 21
 	utilityDate.Month 					=	12
-	utilityDate.Year      += utilityDate.Year
 	zodie.nume 					   = "CAPRICORN"
 	zodie.inceput 					   = utilityDate
 	zodie.symbol					   = "capricorn"
