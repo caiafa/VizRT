@@ -1,4 +1,4 @@
-Function readLine (Byref text As String) As String
+Function readLine(Byref text As String) As String
 	Dim pos As Integer = text.Find("\n")
 	
 	readLine = ""
