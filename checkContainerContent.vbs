@@ -3,9 +3,5 @@ sub onInit ()
 end sub
 
 sub OnGeometryChanged(geom As Geometry)
-	if geometry.text <> "" then
-		active = true
-	else
-		active = false
-	end if
+	active = geometry.text <> ""
 end sub
