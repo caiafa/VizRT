@@ -5,14 +5,15 @@ Sub OnExecAction(buttonId As Integer)
 	key = ">" & GetParameterString("key")	
 	
 	If buttonId == 1 Then
+		println section & key
 		This.Geometry.Text = CStr(readIni(GetParameterString("textPath"))[section & key])
 	End If
 End Sub
 
 Sub OnInitParameters()
 	RegisterFileSelector ("textPath", "Path", "", "", ".ini")	
-	RegisterParameterString("section", "Section", "", 100, 100, "")
-	RegisterParameterString("key", "Key", "", 100, 100, "")
+	RegisterParameterString("section", "Section", "", 50, 50, "")
+	RegisterParameterString("key", "Key", "", 50, 50, "")
 	RegisterPushButton("update", "UPDATE", 1)
 End Sub
 
@@ -42,6 +43,7 @@ Function readIni(configFile As String) As StringMap
 				
 				If currentLine.Match("\\[\\w+\\]") Then
 					currentSection = currentLine.GetSubstring(1, currentLine.Length - 2)
+					currentSection.Trim()
 				Else
 					keyValue = ""
 					currentLine.Split("=", keyValues)
@@ -50,6 +52,9 @@ Function readIni(configFile As String) As StringMap
 						For i=1 To keyValues.Ubound
 							keyValue &= keyValues[i]
 						Next
+						
+						keyValues[0].Trim()
+						keyValue.Trim()
 						
 						readIni[">" & currentSection & ">" & keyValues[0]] = keyValue
 					Else
