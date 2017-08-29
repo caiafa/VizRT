@@ -5,10 +5,10 @@ Dim FIELD_NAME As String = "FieldName"
 
 
 Sub OnInit()
-	reset()
+	resetSharedDataPoolKeys()
 End Sub
 	
-Sub reset()
+Sub resetSharedDataPoolKeys()
 	RegisterInfoText("Resetează valorile de Scene.Map sharuite de subcontainere.")
 	
 	Dim currentContainer As Container = FirstChildContainer
@@ -29,6 +29,7 @@ End Sub
 
 Sub OnExecAction(buttonId As Integer)
 	If buttonId == 1 Then
-		reset()
+		resetSharedDataPoolKeys()
 	End If
 End Sub
+
