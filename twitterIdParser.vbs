@@ -19,10 +19,22 @@ end sub
 
 Sub parseText(text As String, infoType As String)
 	Dim userName, userId As String
+	userName = ""
+	userId = ""
 	
 	text.trim()
-	userId = text.GetSubstring(text.FindLastOf("@"), text.Length - text.FindLastOf("@"))
-	userName = text.GetSubstring(0, text.Length - (text.Length - text.FindLastOf("@")))
+	
+	If text.Length > 0 Then
+		If text.FindLastOf("@") <> - 1 Then
+			userId = text.GetSubstring(text.FindLastOf("@"), text.Length - text.FindLastOf("@"))
+			userName = text.GetSubstring(0, text.Length - (text.Length - text.FindLastOf("@")))
+		Else
+			userName = text
+		End If
+	End If
+	
+	userId.trim()
+	userName.trim()
 	
 	If infoType == "UserId" Then
 		geometry.text = userId
