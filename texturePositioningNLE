@@ -1,0 +1,52 @@
+Dim targetContainer As Container
+
+sub onInit()
+	geometry.registerTextChangedCallback()
+	updateGeometryScreenSize()
+	updateStrapTexturePositionX()
+end sub
+
+sub onInitParameters ()
+	registerParameterDouble("valueScaling", "Value Scaling", 1, -1000, 1000)
+	registerParameterDouble("valueOffset", "Value Offset", 0, -1000, 1000)
+	registerParameterContainer ("textureContainer", "Texture container")
+	
+	registerParameterDouble("containerSize", "Container Size", 0, -1000, 1000)
+	'registerParameterDouble("texturePositionX", "Texture Position X", 0, -1000, 1000)
+	
+	SendGuiStatus("containerSize", 0)
+	SendGuiStatus("texturePositionX", 0)
+end sub	
+
+sub updateStrapTexturePositionX()
+	Dim a,b As Double 
+	a = GetParameterDouble("valueScaling")
+	b = GetParameterDouble("valueOffset")
+	
+
+	'This.ScriptPluginInstance.SetParameterDouble("containerSize", screenSize)
+	targetContainer = GetParameterContainer("textureContainer")
+	targetContainer.Texture.MapPosition.x = a*GetParameterDouble("containerSize")+b
+	'println (targetContainer.Texture.MapPosition.x) 
+end sub
+
+sub onGeometryChanged (geom As Geometry)
+	updateGeometryScreenSize()
+	updateStrapTexturePositionX()
+end sub
+
+Sub	updateGeometryScreenSize()
+	Dim leftCorner, rightCorner As vertex
+	Dim screenSize As Double
+		
+	This.GetTransformedBoundingBox(leftCorner, rightCorner)
+	screenSize = rightCorner.x - leftCorner.x
+	
+	This.ScriptPluginInstance.SetParameterDouble("containerSize", screenSize)
+	SendGuiRefresh()
+End Sub
+
+sub OnParameterChanged(parameterName As String)
+	updateStrapTexturePositionX()
+end sub
+
