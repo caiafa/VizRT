@@ -9,15 +9,7 @@ Sub randomContainer()
 	This.GetContainerAndSubContainers(containersAvailable, False)
 	containersAvailable.Erase(0)
 
-	showContainer = Random(containersAvailable.Ubound + 1)
-	
-	For i = 0 To containersAvailable.Ubound
-		If i == showContainer Then
-			containersAvailable[i].Active = True
-		Else
-			containersAvailable[i].Active = False
-		End If
-	Next
+	ShowOneChildContainer(Random(containersAvailable.Ubound + 1))
 End Sub
 
 Sub OnExecAction(buttonId As Integer)
